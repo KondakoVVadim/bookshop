@@ -1,0 +1,13 @@
+
+{% extends 'book_app/base.html'%}
+
+
+{% block title %} Информация о авторе {{book.title}}{% endblock %}
+
+
+{% block content %}
+    <h1>Автор</h1>
+    <h2>Имя - {{ author.first_name }}</h2>
+    <h2>Фамилия - {{ author.last_name }}</h2>
+    <h2>Почта - {{ author.author_email }}</h2>
+{% endblock %}
