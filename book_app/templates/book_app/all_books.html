@@ -9,7 +9,7 @@
     <h2>Список всех книг</h2>
     <ul>
         {% for book in books %}
-            <li><a href="{{ book.get_url }}"> {{book.title}}</a>, рейтинг - {{book.rating}}%, год - {{book.author|default:'Неизвестно'}}</li>
+            <li><a href="{{ book.get_url }}"> {{book.title}}</a>, рейтинг - {{book.rating}}%, Автор - {{book.author|default:'Неизвестно'}}</li>
         {% endfor %}
         <a href="/admin">Админ</a> | <a href="/authors">Авторы</a>
     </ul>
