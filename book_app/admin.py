@@ -1,9 +1,10 @@
 from django.contrib import admin, messages
-from .models import Book, Author
+from .models import Book, Author, Heroes
 from django.db.models import QuerySet
 
 # Register your models here.
 admin.site.register(Author)
+admin.site.register(Heroes)
 
 
 class RatingFilter(admin.SimpleListFilter):
@@ -35,10 +36,12 @@ class BookAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     # exclude = ['slug']
     # readonly_fields = ['author']
-    list_display = ['title', 'rating', 'is_best_selling', 'rating_status', 'currency', 'author_contact']
-    list_editable = ['rating', 'is_best_selling', 'currency', 'author_contact']
+    list_display = ['title', 'author', 'rating', 'is_best_selling', 'rating_status', 'currency']
+    list_editable = ['rating', 'author', 'is_best_selling', 'currency']
     ordering = ['-rating', '-title']
-    list_per_page = 5
+    # filter_horizontal = ['heroes']
+    filter_vertical =  ['heroes']
+    # list_per_page = 5
     actions = ['set_usd', 'set_eur', 'set_rub']
     search_fields = ['title']
     list_filter = ['title', 'currency', RatingFilter]

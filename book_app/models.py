@@ -14,6 +14,22 @@ class Author(models.Model):
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
 
+class Heroes(models.Model):
+    MALE = 'M'
+    FEMALE = 'F'
+    GENDERS = [
+        (MALE, 'Мужчина'),
+        (FEMALE, 'Женщина')
+    ]
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100, null=True)
+    gender = models.CharField(max_length=1, choices=GENDERS, default=MALE)
+
+    def __str__(self):
+        if self.gender == self.MALE:
+            return f'Герой {self.first_name} {self.last_name}'
+        return f'Героиня {self.first_name} {self.last_name}'
+
 
 class Book(models.Model):
     EUR = 'EUR'
@@ -28,10 +44,10 @@ class Book(models.Model):
     title = models.CharField(max_length=70)
     rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100)])
     is_best_selling = models.BooleanField(default=False)
-    author = models.CharField(max_length=100, null=True)
     slug = models.SlugField(default='', null=False)
     currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default=RUB)
-    author_contact = models.ForeignKey(Author, on_delete=models.PROTECT, null=True)
+    author = models.ForeignKey(Author,related_name='books', on_delete=models.PROTECT, null=True)
+    heroes = models.ManyToManyField(Heroes)
 
     def get_url(self):
         return reverse('book-detail', args=[self.slug])

@@ -8,4 +8,12 @@
 {% block content %}
     <h2>Информация о книге {{book.title}}</h2>
     <h3> {{ book }} </h3>
+    <h3>Автор - <a href="{% url 'author-detail' book.author.first_name %}">{{ book.author }}</a></h3>
+    <h3>Герои:</h3>
+    <ul class="list">
+        {% for hero in book.heroes.all %}
+        <li><a href="{% url 'hero-detail' hero.first_name %}">{{hero}}</a></li>
+        {% endfor %}
+    </ul>
+
 {% endblock %}

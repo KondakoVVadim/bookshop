@@ -1,0 +1,13 @@
+
+{% extends 'book_app/base.html'%}
+
+
+{% block title %} Информация о герое{% endblock %}
+
+
+{% block content %}
+    <h1>Герой книги</h1>
+    <h2>Имя - {{ hero.first_name }}</h2>
+    <h2>Фамилия - {{ hero.last_name }}</h2>
+    <h2>Гендер - {{hero.gender}}</h2>
+{% endblock %}

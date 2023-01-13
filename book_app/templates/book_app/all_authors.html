@@ -7,7 +7,7 @@
 
 {% block content %}
     <h2>Список всех авторов</h2>
-    <ul>
+    <ul class="list">
         {% for author in authors %}
             <li><a href="{{author.first_name}}"> {{author.first_name}} {{author.last_name}}</a></li>
         {% endfor %}

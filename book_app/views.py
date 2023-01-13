@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import F, Sum, Max, Min, Count, Avg, Value
 # Create your views here.
-from .models import Book, Author
+from .models import Book, Author, Heroes
 
 
 def show_all_books(request):
@@ -18,6 +18,7 @@ def show_one_book(request, slug_book: str):
     book = get_object_or_404(Book, slug=slug_book)
     return render(request, 'book_app/one_book.html', {
         'book': book
+
     })
 
 
@@ -31,4 +32,10 @@ def show_one_authors(request, name: str):
     author = Author.objects.get(first_name = f'{name}')
     return render(request, 'book_app/one_author.html', {
         'author': author
+    })
+
+def show_one_hero(request, name: str):
+    hero = Heroes.objects.get(first_name = f'{name}')
+    return render(request, 'book_app/one_hero.html', {
+        'hero': hero
     })
